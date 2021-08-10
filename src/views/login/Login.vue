@@ -31,13 +31,14 @@ export default {
   },
 } 
 </script>
-<style>
+<style lang="scss" scoped>
 .login {
   width: 30%;
   margin: 0 auto; 
   padding-top: 200px;
-}
-.login-button {
+  .login-button {
     width: 100%
   }
+}
+
 </style>

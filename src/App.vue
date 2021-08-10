@@ -1,11 +1,26 @@
 <template>
-  <div id="app">
-    <!-- <router-link to="/" class="home">首页</router-link> |
-    <router-link to="/about">About</router-link> -->
-    <router-view/>
-  </div>
+  <el-config-provider :locale="locale">
+    <div id="app">
+      <router-view/>
+    </div>
+  </el-config-provider>
 </template>
-
+<script>
+import { ElConfigProvider } from 'element-plus'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+export default {
+  name: 'ZhProvider',
+  components: {
+    [ElConfigProvider.name]: ElConfigProvider
+  },
+  setup() {
+    let locale = zhCn
+    return {
+      locale
+    }
+  }
+}
+</script>
 <style>
 html {
   height: 100%;
