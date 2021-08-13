@@ -11,6 +11,9 @@
         <el-button @click="jump" class="login-button">登录</el-button>
       </el-form-item>
     </el-form>
+    <el-button @click="jump">切换视图
+    </el-button>
+    <router-view/>
   </div>
 </template>
 <script>
@@ -26,7 +29,7 @@ export default {
   },
   methods: {
     jump() {
-      this.$router.push('/')
+      this.$router.push('/password')
     }
   },
 } 

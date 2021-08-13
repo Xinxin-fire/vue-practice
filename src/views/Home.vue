@@ -40,6 +40,11 @@
         </template>
       </el-table-column>
     </el-table>
+     <el-form ref="form" :model="form" label-width="80px">
+      <el-form-item label="活动名称">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+     </el-form>
   </div>
 </template>
 
@@ -75,6 +80,9 @@ export default {
           tag: "公司",
         },
       ],
+      form: {
+        name: ''
+      }
     };
   },
   methods: {
@@ -100,20 +108,22 @@ export default {
 <style lang="scss" scoped>
 .home {
   color: $--base-color;
+  padding: 100px;
+  height: 200px;
+  font-size: 18px;
+}
+::v-deep(.el-form-item__label){
+  width: 80px !important;
 }
 @font-face {
-  font-family: 'el-icon-arrow-down';  /* Project id 2721947 */
+  font-family: 'el-filter-icon';  /* Project id 2721947 */
   src: url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.woff2?t=1628069245371') format('woff2'),
        url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.woff?t=1628069245371') format('woff'),
        url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.ttf?t=1628069245371') format('truetype');
 }
 ::v-deep(.el-table__column-filter-trigger .el-icon-arrow-down)  {
-    font-family:"el-icon-arrow-down" !important;
+    font-family:"el-filter-icon" !important;
     font-size:14px;
-    margin-left: 2px;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-stroke-width: 0.2px;
-    -moz-osx-font-smoothing: grayscale;
 }
 ::v-deep(.el-table__column-filter-trigger i) {
   color: rgba(0,0,0,0.25);

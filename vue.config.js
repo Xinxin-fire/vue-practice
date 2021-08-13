@@ -13,6 +13,13 @@ module.exports = {
     loaderOptions: {
       sass: {
         data: `@import "@/style/_variables.scss";`
+      },
+      postcss: {
+        plugins: [
+          require("postcss-px2rem")({
+            remUnit: 192
+          })
+        ]
       }
     }
   }
