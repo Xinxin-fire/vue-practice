@@ -1,62 +1,133 @@
 <template>
-  <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-  <el-radio-button :label="false">展开</el-radio-button>
-  <el-radio-button :label="true">收起</el-radio-button>
-</el-radio-group>
-<el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-  <el-submenu index="1">
-    <template #title>
-      <i class="el-icon-location"></i>
-      <span>导航一</span>
-    </template>
-    <el-menu-item-group>
-      <template #title>分组一</template>
-      <el-menu-item index="1-1">选项1</el-menu-item>
-      <el-menu-item index="1-2">选项2</el-menu-item>
-    </el-menu-item-group>
-    <el-menu-item-group title="分组2">
-      <el-menu-item index="1-3">选项3</el-menu-item>
-    </el-menu-item-group>
-    <el-submenu index="1-4">
-      <template #title>选项4</template>
-      <el-menu-item index="1-4-1">选项1</el-menu-item>
-    </el-submenu>
-  </el-submenu>
-  <el-menu-item index="2">
-    <i class="el-icon-menu"></i>
-    <template #title>导航二</template>
-  </el-menu-item>
-  <el-menu-item index="3" disabled>
-    <i class="el-icon-document"></i>
-    <template #title>导航三</template>
-  </el-menu-item>
-  <el-menu-item index="4">
-    <i class="el-icon-setting"></i>
-    <template #title>导航四</template>
-  </el-menu-item>
-</el-menu>
+  <div class="home">
+    表格
+    <el-table row-key="date" ref="filterTable" :data="tableData" style="width: 100%">
+      <el-table-column
+        prop="date"
+        label="日期"
+        sortable
+        width="180"
+        column-key="date"
+        :filters="[
+          { text: '2016-05-01', value: '2016-05-01' },
+          { text: '2016-05-02', value: '2016-05-02' },
+          { text: '2016-05-03', value: '2016-05-03' },
+          { text: '2016-05-04', value: '2016-05-04' },
+        ]"
+        :filter-method="filterHandler"
+      >
+      </el-table-column>
+      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
+      <el-table-column prop="address" label="地址" :formatter="formatter">
+      </el-table-column>
+      <el-table-column
+        prop="tag"
+        label="标签"
+        width="100"
+        :filters="[
+          { text: '家', value: '家' },
+          { text: '公司', value: '公司' },
+        ]"
+        :filter-method="filterTag"
+        filter-placement="bottom-end"
+      >
+        <template #default="scope">
+          <el-tag
+            :type="scope.row.tag === '家' ? 'primary' : 'success'"
+            disable-transitions
+            >{{ scope.row.tag }}</el-tag
+          >
+        </template>
+      </el-table-column>
+    </el-table>
+     <el-form ref="form" :model="form" label-width="80px">
+      <el-form-item label="活动名称">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+     </el-form>
+  </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        isCollapse: true
-      };
-    },
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+export default {
+  components: {},
+  data() {
+    return {
+      tableData: [
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+          tag: "家",
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1517 弄",
+          tag: "公司",
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1519 弄",
+          tag: "家",
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+          tag: "公司",
+        },
+      ],
+      form: {
+        name: ''
       }
-    }
-  }
+    };
+  },
+  methods: {
+    resetDateFilter() {
+      this.$refs.filterTable.clearFilter("date");
+    },
+    clearFilter() {
+      this.$refs.filterTable.clearFilter();
+    },
+    formatter(row) {
+      return row.address;
+    },
+    filterTag(value, row) {
+      return row.tag === value;
+    },
+    filterHandler(value, row, column) {
+      const property = column["property"];
+      return row[property] === value;
+    },
+  },
+};
 </script>
-<style>
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-  }
+<style lang="scss" scoped>
+.home {
+  color: $--base-color;
+  padding: 100px;
+  height: 200px;
+  font-size: 18px;
+}
+::v-deep(.el-form-item__label){
+  width: 80px !important;
+}
+@font-face {
+  font-family: 'el-filter-icon';  /* Project id 2721947 */
+  src: url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.woff2?t=1628069245371') format('woff2'),
+       url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.woff?t=1628069245371') format('woff'),
+       url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.ttf?t=1628069245371') format('truetype');
+}
+::v-deep(.el-table__column-filter-trigger .el-icon-arrow-down)  {
+    font-family:"el-filter-icon" !important;
+    font-size:14px;
+}
+::v-deep(.el-table__column-filter-trigger i) {
+  color: rgba(0,0,0,0.25);
+}
+::v-deep(.el-icon-arrow-down::before) {
+  content: '\e6af' !important;
+}
 </style>

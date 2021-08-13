@@ -1,134 +1,135 @@
 <template>
-  <div class="home">
-    表格
-    <el-table row-key="date" ref="filterTable" :data="tableData" style="width: 100%">
-      <el-table-column
-        prop="date"
-        label="日期"
-        sortable
-        width="180"
-        column-key="date"
-        :filters="[
-          { text: '2016-05-01', value: '2016-05-01' },
-          { text: '2016-05-02', value: '2016-05-02' },
-          { text: '2016-05-03', value: '2016-05-03' },
-          { text: '2016-05-04', value: '2016-05-04' },
-        ]"
-        :filter-method="filterHandler"
-      >
-      </el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"> </el-table-column>
-      <el-table-column prop="address" label="地址" :formatter="formatter">
-      </el-table-column>
-      <el-table-column
-        prop="tag"
-        label="标签"
-        width="100"
-        :filters="[
-          { text: '家', value: '家' },
-          { text: '公司', value: '公司' },
-        ]"
-        :filter-method="filterTag"
-        filter-placement="bottom-end"
-      >
-        <template #default="scope">
-          <el-tag
-            :type="scope.row.tag === '家' ? 'primary' : 'success'"
-            disable-transitions
-            >{{ scope.row.tag }}</el-tag
-          >
-        </template>
-      </el-table-column>
-    </el-table>
-     <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="活动名称">
-        <el-input v-model="form.name"></el-input>
-      </el-form-item>
-     </el-form>
+  <div class="main">
+    <div class="nav">
+      <span>vue3-practice</span>
+      <div>
+        <span>yule</span>
+        <img alt="头像" src="@/assets/avatar.jpg" />
+      </div>
+    </div>
+    <el-row class="menu">
+      <el-col :span="3">
+        <el-menu
+          :uniqueOpened="true"
+          default-active="2"
+          class="left-side-menu"
+          router
+          @open="handleOpen"
+          @close="handleClose"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
+          <el-submenu index="1">
+            <template #title>
+              <i class="el-icon-location"></i>
+              <span>导航一</span>
+            </template>
+            <el-menu-item-group>
+              <template #title>分组一</template>
+              <el-menu-item index="1-1">选项1</el-menu-item>
+              <el-menu-item index="1-2">选项2</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="分组2">
+              <el-menu-item index="1-3">选项3</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="1-4">
+              <template #title>选项4</template>
+              <el-menu-item index="1-4-1">选项1</el-menu-item>
+            </el-submenu>
+          </el-submenu>
+          <el-menu-item index="2">
+            <i class="el-icon-menu"></i>
+            <template #title>导航二</template>
+          </el-menu-item>
+          <el-menu-item index="3" disabled>
+            <i class="el-icon-document"></i>
+            <template #title>导航三</template>
+          </el-menu-item>
+          <el-menu-item index="about">
+            <i class="el-icon-setting"></i>
+            <template #title>导航四</template>
+          </el-menu-item>
+          <el-submenu index="5">
+            <template #title>
+              <i class="el-icon-location"></i>
+              <span>导航一</span>
+            </template>
+            <el-menu-item-group>
+              <template #title>分组一</template>
+              <el-menu-item index="5-1">选项1</el-menu-item>
+              <el-menu-item index="5-2">选项2</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="分组2">
+              <el-menu-item index="5-3">选项3</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu>
+      </el-col>
+      <el-col :span="21">
+        <div class="main-app">
+          <router-view />
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
-  components: {},
-  data() {
-    return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          tag: "家",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          tag: "公司",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          tag: "家",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          tag: "公司",
-        },
-      ],
-      form: {
-        name: ''
-      }
-    };
+  created() {
+    console.log(this.$route)
   },
   methods: {
-    resetDateFilter() {
-      this.$refs.filterTable.clearFilter("date");
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath)
     },
-    clearFilter() {
-      this.$refs.filterTable.clearFilter();
-    },
-    formatter(row) {
-      return row.address;
-    },
-    filterTag(value, row) {
-      return row.tag === value;
-    },
-    filterHandler(value, row, column) {
-      const property = column["property"];
-      return row[property] === value;
+    handleClose(key, keyPath) {
+      console.log(key, keyPath)
     },
   },
 };
 </script>
-<style lang="scss" scoped>
-.home {
-  color: $--base-color;
-  padding: 100px;
-  height: 200px;
+
+<style lang="scss">
+.main {
+  height: 100%;
+  background: #f3f3f3;
+}
+.nav {
+  height: 50px;
+  display: flex;
   font-size: 18px;
+  font-weight: 700;
+  >span {
+    width: 12.7%;
+    height: 50px;
+    line-height: 50px;
+    background: #545c64;
+    text-align: center;
+  }
+  div {
+    width: 87.3%;
+    height: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0, 21, 41, 0.18);
+    padding-right: 40px;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+  }
 }
-::v-deep(.el-form-item__label){
-  width: 80px !important;
+.menu {
+  height: calc(100vh - 50px);
 }
-@font-face {
-  font-family: 'el-filter-icon';  /* Project id 2721947 */
-  src: url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.woff2?t=1628069245371') format('woff2'),
-       url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.woff?t=1628069245371') format('woff'),
-       url('//at.alicdn.com/t/font_2721947_bjwnxwkn017.ttf?t=1628069245371') format('truetype');
+.main-app {
+  height: 100%;
 }
-::v-deep(.el-table__column-filter-trigger .el-icon-arrow-down)  {
-    font-family:"el-filter-icon" !important;
-    font-size:14px;
-}
-::v-deep(.el-table__column-filter-trigger i) {
-  color: rgba(0,0,0,0.25);
-}
-::v-deep(.el-icon-arrow-down::before) {
-  content: '\e6af' !important;
+.left-side-menu {
+  height: 100%;
 }
 </style>
