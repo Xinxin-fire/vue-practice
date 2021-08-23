@@ -5,27 +5,35 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    redirect: '/about',
+    redirect: '/overview',
     component: Home,
+    title: '首页',
     children: [
       {
-        path: '/about',
-        name: 'About',
-        component: () => import('../views/About.vue')
+        path: '/overview',
+        name: 'OverviewData',
+        title: '数据总览',
+        component: () => import('../views/overview/OverviewData.vue')
+      },
+      {
+        path: '/table',
+        name: 'Table',
+        title: '表格',
+        component: () => import('../views/table/Table.vue')
+      },
+      {
+        path: '/map',
+        name: 'Map',
+        title: '地图',
+        component: () => import('../views/map/Map.vue')
       }
     ]
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/login/Login.vue'),
-    children: [
-      {
-        path: '/password',
-        name: 'Password',
-        component: () => import('../views/login/Password.vue'),
-      }
-    ]
+    title: '登录',
+    component: () => import('../views/login/Login.vue')
   }
 ]
 
