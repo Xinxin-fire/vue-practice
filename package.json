@@ -10,9 +10,11 @@
   "dependencies": {
     "amfe-flexible": "^2.2.1",
     "core-js": "^3.6.5",
+    "echarts": "^5.1.2",
     "element-plus": "^1.0.2-beta.70",
     "postcss-px2rem": "^0.3.0",
     "vue": "^3.0.0",
+    "vue-baidu-map": "^0.21.22",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },
