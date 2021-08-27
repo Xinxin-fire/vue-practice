@@ -5,6 +5,7 @@ import store from './store'
 import ElementPlus from 'element-plus'
 import 'element-plus/lib/theme-chalk/index.css'
 import "amfe-flexible/index.js"
+import '@/style/base-style.scss'
 
 const Vue = createApp(App)
 Vue.use(ElementPlus)

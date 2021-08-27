@@ -23,7 +23,7 @@
           <el-submenu index="1">
             <template #title>
               <i class="el-icon-location"></i>
-              <span>导航一</span>
+              <span>首页</span>
             </template>
             <el-submenu index="1-4">
               <template #title>选项4</template>
@@ -32,11 +32,15 @@
           </el-submenu>
           <el-menu-item index="table">
             <i class="el-icon-menu"></i>
-            <template #title>导航二</template>
+            <template #title>表格</template>
           </el-menu-item>
           <el-menu-item index="map">
             <i class="el-icon-document"></i>
-            <template #title>导航三</template>
+            <template #title>地图</template>
+          </el-menu-item>
+          <el-menu-item index="echart">
+            <i class="el-icon-document"></i>
+            <template #title>图标</template>
           </el-menu-item>
         </el-menu>
       </el-col>

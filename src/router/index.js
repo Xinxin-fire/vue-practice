@@ -26,7 +26,13 @@ const routes = [
         name: 'Map',
         title: '地图',
         component: () => import('../views/map/Map.vue')
-      }
+      },
+      {
+        path: '/echart',
+        name: 'Echart',
+        title: '图标',
+        component: () => import('../views/echart/Echart.vue')
+      },
     ]
   },
   {

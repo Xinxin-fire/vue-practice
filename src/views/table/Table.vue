@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home base-page">
     表格
     <el-table row-key="date" ref="filterTable" :data="tableData" style="width: 100%">
       <el-table-column
@@ -107,8 +107,6 @@ export default {
 <style lang="scss" scoped>
 .home {
   color: $--base-color;
-  padding: 100px;
-  height: 200px;
   font-size: 18px;
 }
 ::v-deep(.el-form-item__label){
