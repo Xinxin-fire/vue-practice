@@ -193,7 +193,6 @@ export default {
     display: flex;
     flex-direction: column;
     width: 29%;
-    height: 100%;
     >div {
       background-color: #fff;
       border: 1px solid #D6DADE;
@@ -209,7 +208,7 @@ export default {
       }
       .echart-instance {
         width: 100%;
-        height: 85%;
+        height: 78%;
       }
     }
     .left-middle {

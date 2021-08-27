@@ -42,6 +42,10 @@
             <i class="el-icon-document"></i>
             <template #title>图标</template>
           </el-menu-item>
+          <el-menu-item index="theme">
+            <i class="el-icon-document"></i>
+            <template #title>主题色切换</template>
+          </el-menu-item>
         </el-menu>
       </el-col>
       <el-col :span="21">

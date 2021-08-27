@@ -6,7 +6,7 @@ export const dataAnalysisOption = {
     icon: 'circle',
     itemWidth: 8,
     itemHeight: 8,
-    top: '30%',
+    top: '10%',
     left: '70%',
     formatter: function(params) {
       var legendIndex = 0;

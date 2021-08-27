@@ -33,6 +33,12 @@ const routes = [
         title: '图标',
         component: () => import('../views/echart/Echart.vue')
       },
+      {
+        path: '/theme',
+        name: 'Theme',
+        title: '主题色切换',
+        component: () => import('../views/theme/Theme.vue')
+      },
     ]
   },
   {
