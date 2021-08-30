@@ -1,6 +1,11 @@
 <template>
   <div class="home base-page">
     表格
+    <i class="iconfont icon-huodong"></i>
+    <!-- <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-shaixuan"></use>
+    </svg> -->
+    <svg-icon class="svg-class" icon-class="all-tank"></svg-icon>
     <el-table row-key="date" ref="filterTable" :data="tableData" style="width: 100%">
       <el-table-column
         prop="date"
@@ -45,14 +50,18 @@
         <el-input v-model="form.name"></el-input>
       </el-form-item>
      </el-form>
+     <el-button type="primary" @click="debounce(add, 500)">增加</el-button>
+     <div>{{ '当期的数字：'+ count }}</div>
   </div>
 </template>
 
 <script>
+let timeout = null;
 export default {
   components: {},
   data() {
     return {
+      iconName: 'all-tank',
       tableData: [
         {
           date: "2016-05-02",
@@ -81,10 +90,26 @@ export default {
       ],
       form: {
         name: ''
-      }
+      },
+      count: 0
     };
   },
+  beforeUnmount() {
+    timeout = null;
+  },
   methods: {
+    add() {
+      this.count++;
+    },
+    debounce(fn,interval) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        fn()
+      },interval)
+    },
+    // addDebounce() {
+    //   this.debounce('add', 1000);
+    // },
     resetDateFilter() {
       this.$refs.filterTable.clearFilter("date");
     },
@@ -108,6 +133,17 @@ export default {
 .home {
   color: $--base-color;
   font-size: 18px;
+}
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.svg-class {
+  width: 50px;
+  height: 50px;
 }
 ::v-deep(.el-form-item__label){
   width: 80px !important;

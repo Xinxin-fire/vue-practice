@@ -13,6 +13,7 @@
     "echarts": "^5.1.2",
     "element-plus": "^1.0.2-beta.70",
     "postcss-px2rem": "^0.3.0",
+    "svg-sprite-loader": "^6.0.9",
     "vue": "^3.0.0",
     "vue-baidu-map": "^0.21.22",
     "vue-router": "^4.0.0-0",
